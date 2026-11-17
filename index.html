@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kejutan kecil dari Zie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#fff4f1; --bg2:#ffe3ea; --paper:#fffaf2; --ink:#5a3a43; --rose:#e8809a; --rose-d:#c9506f;
+  --blush:#f8c9d4; --line:#f1cdd5; --glow:rgba(232,128,154,.35); --shadow:rgba(201,80,111,.18);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg1:#2a1a21; --bg2:#3b212c; --paper:#3a2a2e; --ink:#fbe9ec; --rose:#f092ab; --rose-d:#ff9db7;
+    --blush:#6a3646; --line:#6a4650; --glow:rgba(240,146,171,.3); --shadow:rgba(0,0,0,.4); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg1:#2a1a21; --bg2:#3b212c; --paper:#3a2a2e; --ink:#fbe9ec; --rose:#f092ab; --rose-d:#ff9db7;
+  --blush:#6a3646; --line:#6a4650; --glow:rgba(240,146,171,.3); --shadow:rgba(0,0,0,.4); color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  min-height:100vh; color:var(--ink); font-family:'Lora',Georgia,'Times New Roman',serif;
+  background:radial-gradient(circle at 20% 10%,var(--bg2),transparent 55%),radial-gradient(circle at 85% 90%,var(--bg2),transparent 50%),var(--bg1);
+  background-color:var(--bg1); overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+#floaters{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.fh{position:absolute;bottom:-40px;color:var(--rose);opacity:0;animation:rise linear infinite;will-change:transform,opacity}
+@keyframes rise{0%{transform:translate3d(0,0,0) rotate(-8deg);opacity:0}12%{opacity:.4}85%{opacity:.25}100%{transform:translate3d(var(--dx),-110vh,0) rotate(10deg);opacity:0}}
+.stage{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 22px;text-align:center}
+.script{font-family:'Caveat','Segoe Script','Brush Script MT',cursive}
+
+/* intro */
+#intro{transition:opacity .9s ease,transform .9s ease}
+#intro.gone{opacity:0;transform:scale(1.08) translateY(-20px);pointer-events:none}
+.env{position:relative;width:min(260px,70vw);aspect-ratio:1.4;margin-bottom:34px;filter:drop-shadow(0 14px 22px var(--shadow));animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.env .back{position:absolute;inset:0;background:var(--blush);border-radius:10px}
+.env .card{position:absolute;left:9%;right:9%;top:10%;bottom:12%;background:var(--paper);border-radius:6px;transition:transform .8s .25s ease}
+.env .front{position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,var(--rose) 0 0) ;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);background:var(--bg2);background:color-mix(in srgb,var(--rose) 55%,var(--blush))}
+.env .flap{position:absolute;left:0;right:0;top:0;height:58%;background:var(--rose);clip-path:polygon(0 0,100% 0,50% 100%);border-radius:10px 10px 0 0;transform-origin:top;transition:transform .8s ease}
+.env .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:30px;color:#fff;z-index:3;text-shadow:0 2px 6px var(--shadow);animation:beat 1.8s ease-in-out infinite;transition:opacity .4s}
+@keyframes beat{50%{transform:translate(-50%,-50%) scale(1.15)}}
+#intro.opening .flap{transform:rotateX(180deg)}
+#intro.opening .card{transform:translateY(-38%)}
+#intro.opening .seal{opacity:0}
+.sp{position:absolute;color:var(--rose);animation:tw 2.8s ease-in-out infinite;font-size:16px}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+h1{font-weight:700;font-size:clamp(30px,8.5vw,44px);line-height:1.2;max-width:15em;color:var(--rose-d)}
+.sub{margin-top:10px;font-style:italic;font-size:15px;opacity:.75}
+button.open{
+  margin-top:30px;font-family:inherit;font-size:16px;font-weight:500;color:#fff;background:var(--rose-d);border:0;cursor:pointer;
+  padding:15px 30px;border-radius:999px;box-shadow:0 8px 20px var(--shadow);transition:transform .2s,box-shadow .2s;
+}
+button.open:hover{transform:translateY(-2px)}
+button.open:active{transform:scale(.97)}
+button:focus-visible{outline:3px solid var(--rose);outline-offset:4px}
+
+/* letter */
+#letter{display:none;justify-content:flex-start;padding-top:48px;padding-bottom:64px}
+#letter.show{display:flex}
+.paper{
+  position:relative;width:100%;max-width:560px;background:var(--paper);border:1px solid var(--line);border-radius:18px;
+  padding:44px 28px 38px;text-align:left;box-shadow:0 20px 40px var(--shadow);
+  opacity:0;transform:translateY(24px) scale(.97);transition:opacity 1s ease,transform 1s ease;
+}
+.paper.in{opacity:1;transform:none}
+.paper::before,.paper::after{content:"✿";position:absolute;color:var(--rose);font-size:22px;opacity:.7}
+.paper::before{top:12px;left:16px}
+.paper::after{bottom:12px;right:16px}
+.paper .to{font-size:30px;color:var(--rose-d);margin-bottom:18px;text-align:center}
+.paper p.m{font-size:17px;line-height:1.85;margin-bottom:20px;opacity:0;transform:translateY(10px);transition:opacity 1s ease,transform 1s ease}
+.paper p.m.in{opacity:1;transform:none}
+.end{margin-top:30px;text-align:center;opacity:0;transition:opacity 1.2s ease}
+.end.in{opacity:1}
+.end .one{font-style:italic;font-size:16px}
+.end .sig{font-size:36px;color:var(--rose-d);margin-top:12px}
+.tiny{height:30px;margin-top:10px;display:flex;justify-content:center;gap:10px;color:var(--rose)}
+.tiny span{opacity:0;transform:scale(0) translateY(8px);animation:pop 1s ease forwards;font-size:14px}
+@keyframes pop{60%{transform:scale(1.25) translateY(-4px)}100%{opacity:.9;transform:scale(1) translateY(0)}}
+@media (prefers-reduced-motion:reduce){
+  .fh,.env,.sp,.seal{animation:none}
+  .paper,.paper p.m,.end,#intro{transition-duration:.01s}
+}
+</style>
+</head>
+<body>
+<div id="floaters" aria-hidden="true"></div>
+
+<main>
+<section class="stage" id="intro">
+  <div class="env" aria-hidden="true">
+    <span class="sp" style="left:-24px;top:-6px">✦</span>
+    <span class="sp" style="right:-26px;top:18%;animation-delay:.9s">✧</span>
+    <span class="sp" style="left:-12px;bottom:6%;animation-delay:1.7s">✧</span>
+    <span class="sp" style="right:-14px;bottom:-10px;animation-delay:.4s">✦</span>
+    <div class="back"></div>
+    <div class="card"></div>
+    <div class="front"></div>
+    <div class="flap"></div>
+    <div class="seal">♥</div>
+  </div>
+  <h1 class="script">Hey, kesayanganku! Ada sesuatu kecil dari Zie buat kamu ❤️</h1>
+  <button class="open" id="openBtn" type="button">Buka pesan dari Zie</button>
+</section>
+
+<section class="stage" id="letter" aria-live="polite">
+  <article class="paper" id="paper">
+    <p class="to script">Untuk kesayanganku ✿</p>
+    <p class="m">Sayang, semangat ya hari ini. Aku tau kamu tetap mau kerja meskipun sedang sakit, dan aku bangga sama tanggung jawab kamu. Tapi jangan sampai kamu terlalu memaksakan diri, ya. Pekerjaan memang penting, tapi kesehatan kamu jauh lebih penting dan gabisa digantikan begitu saja.</p>
+    <p class="m">Kalau memang tubuh kamu butuh istirahat, jangan merasa bersalah untuk berhenti sejenak. Kamu ga harus selalu kuat setiap saat. Aku lebih ingin kamu sehat daripada melihat kamu terus memaksakan diri.</p>
+    <p class="m">Jaga diri baik-baik, ya. Ingat, ada aku yang selalu peduli sama keadaan kamu, bukan cuma saat kamu baik-baik saja, tapi juga saat kamu sedang nggak sehat. Aku sayang kamu, dan aku ingin kamu selalu baik-baik saja❤️.</p>
+    <div class="end" id="end">
+      <p class="one">One more thing, please take care of yourself, okay?</p>
+      <p class="sig script">With love, Zie ❤️</p>
+      <div class="tiny" id="tiny" aria-hidden="true"></div>
+    </div>
+  </article>
+</section>
+</main>
+
+<script>
+(function(){
+  var f=document.getElementById('floaters'), reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    var sym=['♥','♡','✦','♥','❀','♥'];
+    for(var i=0;i<14;i++){
+      var s=document.createElement('span'); s.className='fh'; s.textContent=sym[i%sym.length];
+      s.style.left=(Math.random()*96)+'%'; s.style.fontSize=(12+Math.random()*16)+'px';
+      s.style.animationDuration=(11+Math.random()*10)+'s'; s.style.animationDelay=(-Math.random()*16)+'s';
+      s.style.setProperty('--dx',((Math.random()*80)-40)+'px'); f.appendChild(s);
+    }
+  }
+  var intro=document.getElementById('intro'), letter=document.getElementById('letter'),
+      paper=document.getElementById('paper'), btn=document.getElementById('openBtn'), busy=false;
+  btn.addEventListener('click',function(){
+    if(busy) return; busy=true; btn.disabled=true;
+    intro.classList.add('opening');
+    setTimeout(function(){intro.classList.add('gone')},900);
+    setTimeout(function(){
+      intro.style.display='none'; letter.classList.add('show'); window.scrollTo(0,0);
+      requestAnimationFrame(function(){requestAnimationFrame(function(){paper.classList.add('in')})});
+      var ps=paper.querySelectorAll('p.m');
+      ps.forEach(function(p,i){setTimeout(function(){p.classList.add('in')},900+i*1500)});
+      var t=900+ps.length*1500+600;
+      setTimeout(function(){
+        document.getElementById('end').classList.add('in');
+        var box=document.getElementById('tiny'), n=0;
+        var iv=setInterval(function(){
+          var h=document.createElement('span'); h.textContent='♥'; box.appendChild(h);
+          if(++n>=7) clearInterval(iv);
+        },600);
+      },t);
+    },1900);
+  });
+})();
+</script>
+</body>
+</html>
