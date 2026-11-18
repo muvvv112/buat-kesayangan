@@ -3,163 +3,260 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kejutan kecil dari Zie</title>
+<title>Resep Spesial Buat Kamu 💊</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg1:#fff4f1; --bg2:#ffe3ea; --paper:#fffaf2; --ink:#5a3a43; --rose:#e8809a; --rose-d:#c9506f;
-  --blush:#f8c9d4; --line:#f1cdd5; --glow:rgba(232,128,154,.35); --shadow:rgba(201,80,111,.18);
-  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg1:#2a1a21; --bg2:#3b212c; --paper:#3a2a2e; --ink:#fbe9ec; --rose:#f092ab; --rose-d:#ff9db7;
-    --blush:#6a3646; --line:#6a4650; --glow:rgba(240,146,171,.3); --shadow:rgba(0,0,0,.4); color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg1:#2a1a21; --bg2:#3b212c; --paper:#3a2a2e; --ink:#fbe9ec; --rose:#f092ab; --rose-d:#ff9db7;
-  --blush:#6a3646; --line:#6a4650; --glow:rgba(240,146,171,.3); --shadow:rgba(0,0,0,.4); color-scheme:dark;
-}
+:root{--bg:#d9f2e6;--ink:#12383a;--pink:#ff5c8a;--sun:#ffd23f;--paper:#fffef9;--teal:#1f9d8b}
 *{box-sizing:border-box;margin:0}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{
-  min-height:100vh; color:var(--ink); font-family:'Lora',Georgia,'Times New Roman',serif;
-  background:radial-gradient(circle at 20% 10%,var(--bg2),transparent 55%),radial-gradient(circle at 85% 90%,var(--bg2),transparent 50%),var(--bg1);
-  background-color:var(--bg1); overflow-x:hidden; -webkit-font-smoothing:antialiased;
-}
-#floaters{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-.fh{position:absolute;bottom:-40px;color:var(--rose);opacity:0;animation:rise linear infinite;will-change:transform,opacity}
-@keyframes rise{0%{transform:translate3d(0,0,0) rotate(-8deg);opacity:0}12%{opacity:.4}85%{opacity:.25}100%{transform:translate3d(var(--dx),-110vh,0) rotate(10deg);opacity:0}}
-.stage{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 22px;text-align:center}
-.script{font-family:'Caveat','Segoe Script','Brush Script MT',cursive}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;
+ padding:env(safe-area-inset-top,0) 16px calc(env(safe-area-inset-bottom,0) + 84px);
+ background-image:radial-gradient(circle at 20% 15%,#fff8 0 60px,transparent 61px),radial-gradient(circle at 85% 80%,#fff6 0 90px,transparent 91px)}
+h1,h2,.btn{font-family:'Baloo 2',system-ui,sans-serif}
+.screen{display:none;width:100%;max-width:440px;text-align:center}
+.screen.on{display:block}
+h1{font-size:clamp(30px,8vw,40px);line-height:1.05;font-weight:800;margin-bottom:10px}
+.sub{font-size:17px;margin-bottom:34px}
 
-/* intro */
-#intro{transition:opacity .9s ease,transform .9s ease}
-#intro.gone{opacity:0;transform:scale(1.08) translateY(-20px);pointer-events:none}
-.env{position:relative;width:min(260px,70vw);aspect-ratio:1.4;margin-bottom:34px;filter:drop-shadow(0 14px 22px var(--shadow));animation:bob 4s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-8px)}}
-.env .back{position:absolute;inset:0;background:var(--blush);border-radius:10px}
-.env .card{position:absolute;left:9%;right:9%;top:10%;bottom:12%;background:var(--paper);border-radius:6px;transition:transform .8s .25s ease}
-.env .front{position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,var(--rose) 0 0) ;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);background:var(--bg2);background:color-mix(in srgb,var(--rose) 55%,var(--blush))}
-.env .flap{position:absolute;left:0;right:0;top:0;height:58%;background:var(--rose);clip-path:polygon(0 0,100% 0,50% 100%);border-radius:10px 10px 0 0;transform-origin:top;transition:transform .8s ease}
-.env .seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:30px;color:#fff;z-index:3;text-shadow:0 2px 6px var(--shadow);animation:beat 1.8s ease-in-out infinite;transition:opacity .4s}
-@keyframes beat{50%{transform:translate(-50%,-50%) scale(1.15)}}
-#intro.opening .flap{transform:rotateX(180deg)}
-#intro.opening .card{transform:translateY(-38%)}
-#intro.opening .seal{opacity:0}
-.sp{position:absolute;color:var(--rose);animation:tw 2.8s ease-in-out infinite;font-size:16px}
-@keyframes tw{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
-h1{font-weight:700;font-size:clamp(30px,8.5vw,44px);line-height:1.2;max-width:15em;color:var(--rose-d)}
-.sub{margin-top:10px;font-style:italic;font-size:15px;opacity:.75}
-button.open{
-  margin-top:30px;font-family:inherit;font-size:16px;font-weight:500;color:#fff;background:var(--rose-d);border:0;cursor:pointer;
-  padding:15px 30px;border-radius:999px;box-shadow:0 8px 20px var(--shadow);transition:transform .2s,box-shadow .2s;
-}
-button.open:hover{transform:translateY(-2px)}
-button.open:active{transform:scale(.97)}
-button:focus-visible{outline:3px solid var(--rose);outline-offset:4px}
+/* Tombol kapsul: tahan sampai penuh */
+#capWrap{position:relative;width:250px;height:110px;margin:0 auto 18px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}
+.half{position:absolute;top:0;width:125px;height:110px;transition:transform .6s cubic-bezier(.2,1.4,.4,1)}
+.half.l{left:0;background:var(--pink);border-radius:55px 0 0 55px;border:4px solid var(--ink);border-right-width:2px}
+.half.r{right:0;background:var(--paper);border-radius:0 55px 55px 0;border:4px solid var(--ink);border-left-width:2px;overflow:hidden}
+.fill{position:absolute;left:0;bottom:0;height:0;width:100%;background:var(--sun);transition:height .05s linear}
+.half.l::after{content:"";position:absolute;left:18px;top:14px;width:14px;height:50px;border-radius:8px;background:#fff7;transform:rotate(8deg)}
+.cap-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 17px 'Baloo 2',sans-serif;z-index:3;pointer-events:none;text-shadow:0 2px 0 #fff}
+#capWrap.open .l{transform:translate(-120px,-40px) rotate(-35deg)}
+#capWrap.open .r{transform:translate(120px,-40px) rotate(35deg)}
+#capWrap.open .cap-label{opacity:0}
+#capWrap:active{transform:scale(.97)}
+.hint{font-size:14px;opacity:.75;min-height:20px}
+.pct{font:800 22px 'Baloo 2';margin-top:6px;min-height:34px}
 
-/* letter */
-#letter{display:none;justify-content:flex-start;padding-top:48px;padding-bottom:64px}
-#letter.show{display:flex}
-.paper{
-  position:relative;width:100%;max-width:560px;background:var(--paper);border:1px solid var(--line);border-radius:18px;
-  padding:44px 28px 38px;text-align:left;box-shadow:0 20px 40px var(--shadow);
-  opacity:0;transform:translateY(24px) scale(.97);transition:opacity 1s ease,transform 1s ease;
-}
-.paper.in{opacity:1;transform:none}
-.paper::before,.paper::after{content:"✿";position:absolute;color:var(--rose);font-size:22px;opacity:.7}
-.paper::before{top:12px;left:16px}
-.paper::after{bottom:12px;right:16px}
-.paper .to{font-size:30px;color:var(--rose-d);margin-bottom:18px;text-align:center}
-.paper p.m{font-size:17px;line-height:1.85;margin-bottom:20px;opacity:0;transform:translateY(10px);transition:opacity 1s ease,transform 1s ease}
-.paper p.m.in{opacity:1;transform:none}
-.end{margin-top:30px;text-align:center;opacity:0;transition:opacity 1.2s ease}
-.end.in{opacity:1}
-.end .one{font-style:italic;font-size:16px}
-.end .sig{font-size:36px;color:var(--rose-d);margin-top:12px}
-.tiny{height:30px;margin-top:10px;display:flex;justify-content:center;gap:10px;color:var(--rose)}
-.tiny span{opacity:0;transform:scale(0) translateY(8px);animation:pop 1s ease forwards;font-size:14px}
-@keyframes pop{60%{transform:scale(1.25) translateY(-4px)}100%{opacity:.9;transform:scale(1) translateY(0)}}
-@media (prefers-reduced-motion:reduce){
-  .fh,.env,.sp,.seal{animation:none}
-  .paper,.paper p.m,.end,#intro{transition-duration:.01s}
-}
+/* Kartu */
+.card{background:var(--paper);border:4px solid var(--ink);border-radius:26px;box-shadow:8px 8px 0 var(--ink);padding:26px 22px;text-align:left;animation:pop .45s cubic-bezier(.2,1.5,.4,1)}
+.card h2{font-size:25px;margin-bottom:10px;line-height:1.1}
+.card p{font-size:17.5px;line-height:1.6;min-height:96px}
+.card.core{background:#fff1f5}
+.card.core p{font-size:17px}
+.card.core .sign{font:800 28px 'Baloo 2';color:var(--pink);margin-top:10px}
+@keyframes pop{from{transform:scale(.8) rotate(-3deg);opacity:0}to{transform:none;opacity:1}}
+.btn{margin-top:26px;background:var(--sun);color:var(--ink);border:4px solid var(--ink);border-radius:999px;padding:10px 28px;font-size:20px;font-weight:800;cursor:pointer;box-shadow:0 6px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
+.btn:focus-visible,.fx button:focus-visible,#capWrap:focus-visible{outline:4px solid var(--teal);outline-offset:3px}
+.dots{margin-top:18px;font-size:13px;opacity:.7}
+
+/* Bar efek */
+.fx{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:8px;padding:10px 10px calc(env(safe-area-inset-bottom,0) + 10px);background:var(--paper);border-top:4px solid var(--ink);z-index:20}
+.fx button{width:52px;height:52px;font-size:24px;border-radius:16px;border:3px solid var(--ink);background:var(--bg);cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.fx button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.fx button.on{background:var(--sun)}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:15}
+.shake{animation:shk .4s}
+@keyframes shk{20%{transform:translate(-8px,3px) rotate(-1deg)}40%{transform:translate(8px,-3px) rotate(1deg)}60%{transform:translate(-5px,2px)}80%{transform:translate(5px,-2px)}}
+.float{position:fixed;font-size:34px;z-index:16;pointer-events:none;animation:up 2.4s ease-out forwards}
+@keyframes up{from{transform:translateY(0);opacity:1}to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div id="floaters" aria-hidden="true"></div>
 
-<main>
-<section class="stage" id="intro">
-  <div class="env" aria-hidden="true">
-    <span class="sp" style="left:-24px;top:-6px">✦</span>
-    <span class="sp" style="right:-26px;top:18%;animation-delay:.9s">✧</span>
-    <span class="sp" style="left:-12px;bottom:6%;animation-delay:1.7s">✧</span>
-    <span class="sp" style="right:-14px;bottom:-10px;animation-delay:.4s">✦</span>
-    <div class="back"></div>
-    <div class="card"></div>
-    <div class="front"></div>
-    <div class="flap"></div>
-    <div class="seal">♥</div>
+<!-- LAYAR 1: tombol kapsul -->
+<section class="screen on" id="s0">
+  <h1>🚨 Ada resep darurat<br>buat <span id="nm"></span>!</h1>
+  <p class="sub">Dokter gadungan sudah menyiapkan obatnya.</p>
+  <div id="capWrap" role="button" tabindex="0" aria-label="Tahan kapsul sampai penuh untuk membuka pesan">
+    <div class="half l"></div>
+    <div class="half r"><div class="fill" id="fill"></div></div>
+    <div class="cap-label">TAHAN AKU</div>
   </div>
-  <h1 class="script">Hey, kesayanganku! Ada sesuatu kecil dari Zie buat kamu ❤️</h1>
-  <button class="open" id="openBtn" type="button">Buka pesan dari Zie</button>
+  <div class="pct" id="pct">💊</div>
+  <p class="hint" id="hint">Tahan kapsulnya sampai penuh, jangan dilepas!</p>
 </section>
 
-<section class="stage" id="letter" aria-live="polite">
-  <article class="paper" id="paper">
-    <p class="to script">Untuk kesayanganku ✿</p>
-    <p class="m">Sayang, semangat ya hari ini. Aku tau kamu tetap mau kerja meskipun sedang sakit, dan aku bangga sama tanggung jawab kamu. Tapi jangan sampai kamu terlalu memaksakan diri, ya. Pekerjaan memang penting, tapi kesehatan kamu jauh lebih penting dan gabisa digantikan begitu saja.</p>
-    <p class="m">Kalau memang tubuh kamu butuh istirahat, jangan merasa bersalah untuk berhenti sejenak. Kamu ga harus selalu kuat setiap saat. Aku lebih ingin kamu sehat daripada melihat kamu terus memaksakan diri.</p>
-    <p class="m">Jaga diri baik-baik, ya. Ingat, ada aku yang selalu peduli sama keadaan kamu, bukan cuma saat kamu baik-baik saja, tapi juga saat kamu sedang nggak sehat. Aku sayang kamu, dan aku ingin kamu selalu baik-baik saja❤️.</p>
-    <div class="end" id="end">
-      <p class="one">One more thing, please take care of yourself, okay?</p>
-      <p class="sig script">With love, Zie ❤️</p>
-      <div class="tiny" id="tiny" aria-hidden="true"></div>
-    </div>
-  </article>
+<!-- LAYAR 2: kartu-kartu -->
+<section class="screen" id="s1">
+  <div class="card" id="card"><h2 id="ct"></h2><p id="cp"></p></div>
+  <button class="btn" id="next">Lanjut</button>
+  <div class="dots" id="dots"></div>
 </section>
-</main>
+
+<canvas id="cv"></canvas>
+
+<div class="fx" aria-label="Tombol efek">
+  <button id="bHorn" title="Terompet">📯</button>
+  <button id="bDrum" title="Drum">🥁</button>
+  <button id="bPiano" title="Piano">🎹</button>
+  <button id="bSneeze" title="Bersin">🤧</button>
+  <button id="bBoing" title="Boing">🪀</button>
+  <button id="bConf" title="Konfeti">🎉</button>
+  <button id="bMusic" title="Musik latar">🎵</button>
+</div>
 
 <script>
-(function(){
-  var f=document.getElementById('floaters'), reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduce){
-    var sym=['♥','♡','✦','♥','❀','♥'];
-    for(var i=0;i<14;i++){
-      var s=document.createElement('span'); s.className='fh'; s.textContent=sym[i%sym.length];
-      s.style.left=(Math.random()*96)+'%'; s.style.fontSize=(12+Math.random()*16)+'px';
-      s.style.animationDuration=(11+Math.random()*10)+'s'; s.style.animationDelay=(-Math.random()*16)+'s';
-      s.style.setProperty('--dx',((Math.random()*80)-40)+'px'); f.appendChild(s);
-    }
+/* ====== UBAH DI SINI ====== */
+const NAMA_DIA = "Sayang";      // nama panggilan dia
+const NAMA_KAMU = "";            // isi namamu kalau mau ditulis di akhir, kosongkan kalau tidak
+
+const CARDS = [
+  {t:"🩺 Pemeriksaan dimulai", p:"Dokter Sayang (lulusan Universitas Gugel, nilainya pas-pasan) mendeteksi: pasien terlalu kuat, terlalu sibuk, dan terlalu sering lupa kalau dirinya juga butuh dirawat."},
+  {t:"📋 Hasil diagnosa", p:"Gejala: senyum yang dipaksa, sok kuat, lupa istirahat, dan lupa makan. Resep: rebahan, air putih, dan baca pesan ini sampai habis."},
+  {t:"💊 Aturan pakai", p:"Pesan ini dibaca pelan-pelan, 3 kali sehari sesudah makan. Dilarang di-skip. Kalau di-skip, aku ngambek (sedikit)."},
+  {t:"💌 Pesan dari dokter", p:"Sayanggg, hari ini mungkin kamu harus tetap tersenyum, tetap kuat, dan tetap menjalankan banyak hal meskipun sebenarnya tubuh kamu sedang meminta istirahat. Tapi aku harap kamu ga lupa bahwa kamu juga manusia, bukan seseorang yang harus selalu siap sedia dan selalu kuat dalam keadaan apa pun."},
+  {t:"💌 Pesan dari dokter", p:"Aku tau ada tanggung jawab yang gabisa begitu saja ditinggalkan, dan aku menghargai itu. Namun, jangan sampai kesibukan merawat dan memperhatikan orang lain membuat kamu lupa merawat diri sendiri. Hari ini, tolong sisakan sedikit perhatian untuk kamu juga, ya."},
+  {t:"💌 Pesan dari dokter", p:"Aku mungkin belum bisa berada di samping kamu untuk memastikan kamu baik-baik saja, tapi percayalah, ada seseorang di sini yang selalu berharap kamu sehat, bahagia, dan ga kekurangan alasan untuk tersenyum."},
+  {t:"💌 Pesan dari dokter", p:"Aku lebih suka melihat kamu dalam keadaan sehat daripada terus-terusan mengagumi betapa kuatnya kamu saat sedang sakit. Jadi, syafakillah yaa sayang. Jangan lupa, kamu juga seseorang yang ingin aku jaga, bukan hanya seseorang yang ingin aku lihat terus berjuang.", core:true}
+];
+/* ========================== */
+
+const $=id=>document.getElementById(id);
+$('nm').textContent=NAMA_DIA;
+
+/* ---------- AUDIO (semua dibuat lewat Web Audio, tanpa file) ---------- */
+let AC,master;
+function ac(){
+  if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=.8;master.connect(AC.destination);}
+  if(AC.state==='suspended')AC.resume();
+  return AC;
+}
+function tone(f,d=.25,type='triangle',v=.25,when=0,slideTo=null){
+  const a=ac(),t=a.currentTime+when,o=a.createOscillator(),g=a.createGain();
+  o.type=type;o.frequency.setValueAtTime(f,t);
+  if(slideTo)o.frequency.exponentialRampToValueAtTime(slideTo,t+d);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.015);g.gain.exponentialRampToValueAtTime(.001,t+d);
+  o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.05);
+}
+function noise(d=.2,v=.3,when=0,fFrom=3000,fTo=800,type='bandpass'){
+  const a=ac(),t=a.currentTime+when,n=a.sampleRate*d,b=a.createBuffer(1,n,a.sampleRate),x=b.getChannelData(0);
+  for(let i=0;i<n;i++)x[i]=Math.random()*2-1;
+  const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();
+  s.buffer=b;f.type=type;f.frequency.setValueAtTime(fFrom,t);f.frequency.exponentialRampToValueAtTime(fTo,t+d);
+  g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);
+  s.connect(f);f.connect(g);g.connect(master);s.start(t);
+}
+const N={C4:262,D4:294,E4:330,G4:392,A4:440,C5:523,D5:587,E5:659,G5:784,A5:880,C6:1047};
+const sfx={
+  horn(){tone(220,.5,'sawtooth',.22,0,180);tone(330,.5,'square',.1,0,270);},
+  drum(){tone(150,.25,'sine',.7,0,45);noise(.18,.45,.12,6000,1500,'highpass');tone(150,.25,'sine',.6,.25,45);tone(150,.25,'sine',.6,.37,45);noise(.18,.45,.25,6000,1500,'highpass');},
+  piano(){[N.C5,N.E5,N.G5,N.C6].forEach((f,i)=>{tone(f,.5,'triangle',.28,i*.11);tone(f*2,.3,'sine',.06,i*.11);});},
+  sneeze(){tone(500,.12,'sine',.12,0,700);tone(520,.12,'sine',.12,.18,720);noise(.35,.5,.42,5000,400);tone(900,.3,'sawtooth',.06,.42,200);},
+  boing(){tone(180,.5,'sine',.5,0,720);tone(720,.4,'sine',.3,.5,200);},
+  fanfare(){[N.C5,N.C5,N.C5,N.G5,N.E5,N.G5,N.C6].forEach((f,i)=>{const t=[0,.12,.24,.36,.6,.72,.9][i];tone(f,.35,'square',.13,t);tone(f/2,.35,'triangle',.18,t);});noise(.6,.25,.9,8000,1000,'highpass');},
+  blip(){tone(700+Math.random()*250,.05,'square',.04);},
+  pop(){tone(400,.12,'sine',.4,0,900);},
+  charge(p){tone(200+p*8,.08,'sawtooth',.06);},
+  fail(){tone(500,.35,'sawtooth',.2,0,90);}
+};
+$('bHorn').onclick=()=>{sfx.horn();shake()};
+$('bDrum').onclick=()=>{sfx.drum();shake()};
+$('bPiano').onclick=()=>sfx.piano();
+$('bSneeze').onclick=()=>{sfx.sneeze();floatEmoji('🤧',3)};
+$('bBoing').onclick=()=>{sfx.boing();floatEmoji('🌈',3)};
+$('bConf').onclick=()=>{sfx.fanfare();confetti(160)};
+
+/* musik latar: melodi pentatonik santai, ala kotak musik */
+let music=null,step=0;
+const MEL=[N.C5,0,N.E5,N.G5,N.A5,0,N.G5,N.E5,N.D5,0,N.E5,N.C5,N.A4,N.C5,N.D5,0,
+           N.E5,0,N.G5,N.A5,N.C6,0,N.A5,N.G5,N.E5,0,N.D5,N.E5,N.C5,0,0,0];
+const BASS=[N.C4,N.C4,N.A4/2,N.A4/2,N.G4/2,N.G4/2,N.E4/2,N.G4/2];
+$('bMusic').onclick=e=>{
+  ac();
+  if(music){clearInterval(music);music=null;e.currentTarget.classList.remove('on');return;}
+  e.currentTarget.classList.add('on');
+  music=setInterval(()=>{
+    const f=MEL[step%MEL.length];if(f)tone(f,.4,'triangle',.09);
+    if(step%4===0)tone(BASS[(step/4)%BASS.length],.9,'sine',.12);
+    step++;
+  },230);
+};
+
+/* ---------- EFEK VISUAL ---------- */
+const cv=$('cv'),cx=cv.getContext('2d');let parts=[],raf=null;
+function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener('resize',size);
+function confetti(n=140,x=innerWidth/2,y=innerHeight/2){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const cols=['#ff5c8a','#ffd23f','#1f9d8b','#ffffff','#7c5cff'];
+  for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=4+Math.random()*10;
+    parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-6,w:6+Math.random()*7,h:4+Math.random()*6,r:Math.random()*6,vr:Math.random()*.4-.2,c:cols[i%cols.length],l:120+Math.random()*60});}
+  if(!raf)loop();
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts=parts.filter(p=>p.l-->0);
+  parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.32;p.vx*=.99;p.r+=p.vr;
+    cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.globalAlpha=Math.min(1,p.l/30);cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore();});
+  raf=parts.length?requestAnimationFrame(loop):null;
+  if(!raf)cx.clearRect(0,0,cv.width,cv.height);
+}
+function shake(){document.body.classList.remove('shake');void document.body.offsetWidth;document.body.classList.add('shake')}
+function floatEmoji(e,n=6){for(let i=0;i<n;i++){const s=document.createElement('span');s.className='float';s.textContent=e;
+  s.style.left=(5+Math.random()*88)+'vw';s.style.top=(70+Math.random()*25)+'vh';s.style.animationDelay=(i*.12)+'s';
+  document.body.appendChild(s);setTimeout(()=>s.remove(),3200);}}
+
+/* ---------- TOMBOL KAPSUL: tahan sampai 100% ---------- */
+const cap=$('capWrap');let hold=null,prog=0,opened=false;
+function startHold(e){
+  if(opened)return;e.preventDefault();ac();
+  $('hint').textContent='Terus tahan... jangan dilepas! 😤';
+  clearInterval(hold);
+  hold=setInterval(()=>{
+    prog+=2.2;$('fill').style.height=Math.min(prog,100)+'%';$('pct').textContent=Math.min(100,Math.round(prog))+'%';
+    cap.style.transform=`translate(${(Math.random()-.5)*prog/12}px,${(Math.random()-.5)*prog/12}px)`;
+    if(Math.round(prog)%6===0)sfx.charge(prog);
+    if(prog>=100){clearInterval(hold);openCap();}
+  },30);
+}
+function endHold(){
+  if(opened||!hold)return;clearInterval(hold);hold=null;
+  if(prog>0&&prog<100){sfx.fail();$('hint').textContent='Yah, kurang sabar! Coba lagi, tahan sampai 100% 🙈';}
+  prog=0;$('fill').style.height='0';$('pct').textContent='💊';cap.style.transform='';
+}
+cap.addEventListener('pointerdown',startHold);
+['pointerup','pointerleave','pointercancel'].forEach(ev=>cap.addEventListener(ev,endHold));
+cap.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)startHold(e)});
+cap.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')endHold()});
+
+function openCap(){
+  opened=true;cap.style.transform='';cap.classList.add('open');
+  $('pct').textContent='🎉 TERBUKA!';$('hint').textContent='';
+  sfx.fanfare();shake();
+  const r=cap.getBoundingClientRect();confetti(200,r.left+r.width/2,r.top+r.height/2);
+  setTimeout(()=>show(0),1500);
+}
+
+/* ---------- KARTU ---------- */
+let idx=0,typing=null;
+function show(i){
+  idx=i;const c=CARDS[i];
+  $('s0').classList.remove('on');$('s1').classList.add('on');
+  const card=$('card');card.className='card'+(c.core?' core':'');
+  card.style.animation='none';void card.offsetWidth;card.style.animation='';
+  $('ct').textContent=c.t;sfx.pop();
+  const p=$('cp');p.textContent='';clearInterval(typing);let k=0;
+  typing=setInterval(()=>{
+    p.textContent=c.p.slice(0,++k);if(k%3===0)sfx.blip();
+    if(k>=c.p.length){clearInterval(typing);finishCard(c,p);}
+  },22);
+  $('dots').textContent=(i+1)+' / '+CARDS.length;
+  $('next').textContent=i===CARDS.length-1?'Selesai':'Lanjut';
+  $('next').style.display='inline-block';
+  if(i===3)sfx.piano();
+}
+function finishCard(c,p){
+  if(c.core){
+    const s=document.createElement('div');s.className='sign';
+    s.innerHTML='I love you, sayang. 💖'+(NAMA_KAMU?'<div style="font:600 15px Nunito;color:#12383a;margin-top:6px">— '+NAMA_KAMU+'</div>':'');
+    p.appendChild(s);sfx.fanfare();confetti(240);floatEmoji('💖',10);
+    $('next').textContent='Baca lagi 🔁';
   }
-  var intro=document.getElementById('intro'), letter=document.getElementById('letter'),
-      paper=document.getElementById('paper'), btn=document.getElementById('openBtn'), busy=false;
-  btn.addEventListener('click',function(){
-    if(busy) return; busy=true; btn.disabled=true;
-    intro.classList.add('opening');
-    setTimeout(function(){intro.classList.add('gone')},900);
-    setTimeout(function(){
-      intro.style.display='none'; letter.classList.add('show'); window.scrollTo(0,0);
-      requestAnimationFrame(function(){requestAnimationFrame(function(){paper.classList.add('in')})});
-      var ps=paper.querySelectorAll('p.m');
-      ps.forEach(function(p,i){setTimeout(function(){p.classList.add('in')},900+i*1500)});
-      var t=900+ps.length*1500+600;
-      setTimeout(function(){
-        document.getElementById('end').classList.add('in');
-        var box=document.getElementById('tiny'), n=0;
-        var iv=setInterval(function(){
-          var h=document.createElement('span'); h.textContent='♥'; box.appendChild(h);
-          if(++n>=7) clearInterval(iv);
-        },600);
-      },t);
-    },1900);
-  });
-})();
+}
+$('next').onclick=()=>{
+  ac();clearInterval(typing);
+  if(idx<CARDS.length-1)show(idx+1);
+  else{prog=0;$('fill').style.height='0';cap.classList.remove('open');opened=false;
+    $('s1').classList.remove('on');$('s0').classList.add('on');$('pct').textContent='💊';$('hint').textContent='Tahan kapsulnya lagi kalau mau baca ulang!';}
+};
 </script>
 </body>
 </html>
